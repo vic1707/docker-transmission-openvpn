@@ -219,8 +219,8 @@ else
 fi
 
 if [[ -f /run/secrets/rpc_creds ]]; then
-  export TRANSMISSION_RPC_USERNAME=$(head -1 /run/secrets/rpc_creds)
-  export TRANSMISSION_RPC_PASSWORD=$(tail -1 /run/secrets/rpc_creds)
+  export TRANSMISSION_RPC_USERNAME=$(sed -n '1p' /run/secrets/rpc_creds)
+  export TRANSMISSION_RPC_PASSWORD=$(sed -n '2p' /run/secrets/rpc_creds)
 fi
 echo "${TRANSMISSION_RPC_USERNAME}" > /config/transmission-credentials.txt
 echo "${TRANSMISSION_RPC_PASSWORD}" >> /config/transmission-credentials.txt
